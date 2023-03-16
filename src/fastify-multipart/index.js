@@ -1,3 +1,5 @@
+'use strict';
+
 import Busboy from '@fastify/busboy';
 import os from 'os';
 import eos from 'end-of-stream';
@@ -686,14 +688,22 @@ export function fastifyMultipart(fastify, options, done) {
   }
 
   async function cleanRequestFiles() {
-    if (!this.tmpUploads) {
-      return;
+    if (this.tmpUploads?.length) {
+      for (const filepath of this.tmpUploads) {
+        try {
+          await unlink(filepath);
+        } catch (error) {
+          this.log.error(error, 'could not delete file');
+        }
+      }
     }
-    for (const filepath of this.tmpUploads) {
-      try {
-        await unlink(filepath);
-      } catch (error) {
-        this.log.error(error, 'could not delete file');
+    if (this.requestFiles?.length) {
+      for (const file of this.requestFiles) {
+        try {
+          if (file?.filepath) await unlink(file.filepath);
+        } catch (error) {
+          this.log.error(error, 'could not delete file');
+        }
       }
     }
   }
