@@ -210,7 +210,7 @@ export function fastifyMultipart(fastify, options, done) {
     parts: options.limits?.parts || 1000,
     fileSize: options.limits?.fileSize || fastify.initialConfig.bodyLimit,
   };
-
+  options.mode = options?.mode || 'disk';
   const attachFieldsToBody = options.attachFieldsToBody;
   if (options.addToBody === true) {
     if (typeof options.sharedSchemaId === 'string') {
