@@ -7,3 +7,11 @@ export const FastifyFiles = createParamDecorator(
     return reqest[field || 'requestFiles'];
   },
 );
+
+/**获取经过passport-jwt校验后挂载的request.user内容或其中的某个属性值 */
+export const JwtUser = createParamDecorator(
+  (prop: string, ctx: ExecutionContext) => {
+    const { user } = ctx.switchToHttp().getRequest();
+    return prop ? user?.[prop] : user;
+  },
+);
