@@ -1,6 +1,6 @@
 {
   "name": "@iimm/nestjs-shared",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "nestjs shared utils ",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
@@ -23,7 +23,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@iimm/fastify-multipart": "^1.0.2",
+    "@iimm/fastify-multipart": "^1.0.3",
     "@nestjs/common": "^9.3.10",
     "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
