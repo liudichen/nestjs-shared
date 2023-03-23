@@ -1,6 +1,6 @@
 {
   "name": "@iimm/nestjs-shared",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "nestjs shared utils ",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
@@ -24,19 +24,21 @@
   },
   "devDependencies": {
     "@iimm/fastify-multipart": "^1.0.3",
-    "@nestjs/common": "^9.3.10",
+    "@nestjs/common": "^9.3.12",
     "@types/node": "18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
-    "@typescript-eslint/parser": "^5.55.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.7.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "fastify": "^4.15.0",
     "father": "^4.1.7",
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.6",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@iimm/fastify-multipart": "^1.0.2",
-    "@nestjs/common": "^9.3.10"
+    "@nestjs/common": "^9.3.10",
+    "fastify": "^4.15.0"
   }
 }
