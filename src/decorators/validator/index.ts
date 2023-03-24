@@ -46,8 +46,12 @@ export const IsGenericType = (
 /**Dto中验证是否是某1类型的元素或其数组 */
 export const IsSelfOrArrayType = (
   /**class-validator的几个内置类型或可选值的数组或一个自定义的校验函数用来校验每1个元素 */
-  typeOrValueRangeArrayOrValidator:
-    | keyof typeof InnerTypesValidator
+  itemTypeOrListOrValidator:
+    | 'number'
+    | 'string'
+    | 'boolean'
+    | 'int'
+    | 'numberString'
     | ((value: any) => boolean)
     | any[],
   validationOptions?: ValidationOptions,
@@ -58,11 +62,11 @@ export const IsSelfOrArrayType = (
       validator: {
         validate: (value: any) => {
           const fn =
-            typeof typeOrValueRangeArrayOrValidator === 'function'
-              ? typeOrValueRangeArrayOrValidator
-              : Array.isArray(typeOrValueRangeArrayOrValidator)
-              ? (v: any) => typeOrValueRangeArrayOrValidator.includes(v)
-              : InnerTypesValidator[typeOrValueRangeArrayOrValidator];
+            typeof itemTypeOrListOrValidator === 'function'
+              ? itemTypeOrListOrValidator
+              : Array.isArray(itemTypeOrListOrValidator)
+              ? (v: any) => itemTypeOrListOrValidator.includes(v)
+              : InnerTypesValidator[itemTypeOrListOrValidator];
           return Array.isArray(value)
             ? value.every((ele) => fn?.(ele))
             : fn?.(value);
