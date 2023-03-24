@@ -44,3 +44,5 @@ export const DeserializedBody = createParamDecorator(
     return deserialize(body?.[prop]);
   },
 );
+
+export * from './validator';

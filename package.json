@@ -22,22 +22,25 @@
   "publishConfig": {
     "access": "public"
   },
+  "dependencies": {
+    "@iimm/fastify-multipart": "^1.0.3"
+  },
   "devDependencies": {
     "@iimm/fastify-multipart": "^1.0.3",
     "@nestjs/common": "^9.3.12",
     "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
+    "class-validator": "^0.14.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "fastify": "^4.15.0",
     "father": "^4.1.7",
-    "prettier": "^2.8.6",
+    "prettier": "^2.8.7",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "@iimm/fastify-multipart": "^1.0.2",
     "@nestjs/common": "^9.3.10",
     "fastify": "^4.15.0"
   }
