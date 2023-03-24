@@ -45,7 +45,7 @@ export const IsGenericType = (
 
 /**Dto中验证是否是某1类型的元素或其数组 */
 export const IsSelfOrArrayType = (
-  /**class-validator的几个内置类型或可选值的数组或一个自定义的校验函数 */
+  /**class-validator的几个内置类型或可选值的数组或一个自定义的校验函数用来校验每1个元素 */
   typeOrValueRangeArrayOrValidator:
     | keyof typeof InnerTypesValidator
     | ((value: any) => boolean)
@@ -56,16 +56,17 @@ export const IsSelfOrArrayType = (
     {
       name: 'IS_SELF_OR_ARRAY_TYPE',
       validator: {
-        validate: (value: any) =>
-          typeof typeOrValueRangeArrayOrValidator === 'function'
-            ? typeOrValueRangeArrayOrValidator(value)
-            : Array.isArray(typeOrValueRangeArrayOrValidator)
-            ? Array.isArray(value)
-              ? value.every((ele) =>
-                  typeOrValueRangeArrayOrValidator.includes(ele),
-                )
-              : typeOrValueRangeArrayOrValidator.includes(value)
-            : InnerTypesValidator[typeOrValueRangeArrayOrValidator]?.(value),
+        validate: (value: any) => {
+          const fn =
+            typeof typeOrValueRangeArrayOrValidator === 'function'
+              ? typeOrValueRangeArrayOrValidator
+              : Array.isArray(typeOrValueRangeArrayOrValidator)
+              ? (v: any) => typeOrValueRangeArrayOrValidator.includes(v)
+              : InnerTypesValidator[typeOrValueRangeArrayOrValidator];
+          return Array.isArray(value)
+            ? value.every((ele) => fn?.(ele))
+            : fn?.(value);
+        },
         defaultMessage: (validationArguments?: ValidationArguments) => {
           return `${validationArguments?.property}: Data type mismatch`;
         },
