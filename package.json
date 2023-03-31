@@ -23,11 +23,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@iimm/fastify-multipart": "^1.0.3"
+    "@iimm/fastify-multipart": "^1.0.3",
+    "qs": "^6.11.1"
   },
   "devDependencies": {
     "@nestjs/common": "^9.3.12",
     "@types/node": "18.11.18",
+    "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "class-validator": "^0.14.0",
