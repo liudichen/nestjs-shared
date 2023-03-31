@@ -48,13 +48,10 @@ export const DeserializedBody = createParamDecorator(
 
 export const QsRequestParams = createParamDecorator(
   (field: string | string[], ctx: ExecutionContext) => {
+    const url = ctx.switchToHttp().getRequest<FastifyRequest>().url;
+    const index = url.indexOf('?');
     const params: Record<string, any> =
-      qs.parse(
-        ctx.switchToHttp().getRequest<FastifyRequest>().params as Record<
-          string,
-          string
-        >,
-      ) || {};
+      qs.parse(index === -1 ? '' : url.slice(index + 1)) || {};
     if (!field) return params;
     if (Array.isArray(field)) {
       const data: Record<string, any> = {};
