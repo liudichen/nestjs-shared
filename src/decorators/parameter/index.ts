@@ -1,5 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { FastifyRequest } from 'fastify';
+import qs from 'qs';
 
 /**从请求中或取fastifyFile文件数组的装饰器(如果传递某个fieldname参数则必须设置@iimm/fastify-multpart的参数attachFileToBody=false) */
 export const FastifyFiles = createParamDecorator(
@@ -42,5 +43,26 @@ export const DeserializedBody = createParamDecorator(
       return data;
     }
     return deserialize(body?.[prop]);
+  },
+);
+
+export const QsRequestParams = createParamDecorator(
+  (field: string | string[], ctx: ExecutionContext) => {
+    const params: Record<string, any> =
+      qs.parse(
+        ctx.switchToHttp().getRequest<FastifyRequest>().params as Record<
+          string,
+          string
+        >,
+      ) || {};
+    if (!field) return params;
+    if (Array.isArray(field)) {
+      const data: Record<string, any> = {};
+      for (const fd of field) {
+        data[fd] = params?.[fd];
+      }
+      return data;
+    }
+    return params?.[field];
   },
 );
