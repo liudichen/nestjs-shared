@@ -8,9 +8,7 @@ import {
   isInt,
   isArray,
   isBoolean,
-  buildMessage,
 } from 'class-validator';
-import isIso8601String from 'validator/lib/isISO8601'
 
 const InnerTypesValidator = {
   number: isNumber,
@@ -81,34 +79,3 @@ export const IsSelfOrArrayType = (
     validationOptions,
   );
 
-    interface IsISO8601Options {
-        /**
-         * If `strict` is `true`, performs additional checks for valid dates,
-         * e.g. invalidates dates like `2009-02-29`.
-         *
-         * @default false
-         */
-        strict?: boolean | undefined;
-        /**
-         * If `strictSeparator` is true, date strings with date and time separated
-         * by anything other than a T will be invalid
-         *
-         */
-        strictSeparator?: boolean | undefined;
-    }
-
-  export const IsDateString = (options?: IsISO8601Options, validationOptions?: ValidationOptions) => 
-  ValidateBy(
-    {
-      name: 'IS_DATE_STRING',
-      constraints: [options],
-      validator: {
-        validate: (value): boolean => isIso8601String(value, options),
-        defaultMessage: buildMessage(
-          eachPrefix => eachPrefix + '$property must be a valid ISO 8601 date string',
-          validationOptions
-        ),
-      },
-    },
-    validationOptions
-  )
